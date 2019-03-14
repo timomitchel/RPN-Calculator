@@ -58,16 +58,20 @@ class RpnCalculator
     input.scan(/[-=\+\*\/0-9q]/).length == 0 || (input.length > 1 && !input.scan(/\D/).empty?)
   end
 
-  def check_input(input)
+  def check_filter_input(input)
     if filter_input(input)
         p 'Invalid character'
-        enter_loop
+        run
     end
+  end
+
+  def check_input(input)
+    check_filter_input(input)
     case input
-    when input == 'q'
+    when 'q'
         p 'goodbye'
         exit!
-    when input == '='
+    when '='
       calculate_values(@polish_expression)
     else
       @polish_expression << input
