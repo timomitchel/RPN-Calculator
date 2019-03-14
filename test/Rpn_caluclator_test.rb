@@ -1,7 +1,14 @@
 require 'minitest/autorun'
 require './lib/rpn_calculator'
 
+#Extend for tests only
+class RpnCalculator
+  attr_accessor :stack
+end
+
 class RpnCalculatorTest < Minitest::Test
+
+  TEST_INPUT = ['13','5293094','5'].freeze
 
   def setup
     @calculator = RpnCalculator.new
