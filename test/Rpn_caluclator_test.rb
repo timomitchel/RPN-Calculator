@@ -30,18 +30,15 @@ class RpnCalculatorTest < Minitest::Test
   end
 
   def test_check_input_with_valid_numbers
-    input = '13'
-    @calculator.check_input(input)
-    assert_equal @calculator.polish_expression.first, input
-    input = '5293094'
-    @calculator.check_input(input)
-    assert_equal @calculator.polish_expression.last, input
-    input = '5'
-    @calculator.check_input(input)
-    assert_equal @calculator.polish_expression.last, input
+    @calculator.check_input(RpnCalculatorTest::TEST_INPUT.first)
+    assert_equal @calculator.polish_expression.first, RpnCalculatorTest::TEST_INPUT.first
+    @calculator.check_input(RpnCalculatorTest::TEST_INPUT[1])
+    assert_equal @calculator.polish_expression.last, RpnCalculatorTest::TEST_INPUT[1]
+    @calculator.check_input(RpnCalculatorTest::TEST_INPUT.last)
+    assert_equal @calculator.polish_expression.last, RpnCalculatorTest::TEST_INPUT.last
   end
 
-  def test_filter_input
+  def test_filter_input_filters_correct_characters
     refute @calculator.filter_input(RpnCalculator::OPERATORS[0])
     refute @calculator.filter_input(RpnCalculator::OPERATORS[1])
     refute @calculator.filter_input(RpnCalculator::OPERATORS[2])
