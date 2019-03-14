@@ -51,4 +51,39 @@ class RpnCalculatorTest < Minitest::Test
     assert @calculator.filter_input('5-')
     assert @calculator.filter_input('+1')
   end
+
+  def test_calculate_operator_input
+    @calculator.stack = [5, 6]
+    @calculator.calculate_operator_input(RpnCalculator::OPERATORS[0])
+    assert_equal @calculator.stack[0], 11
+    @calculator.stack = [10, 10]
+    @calculator.calculate_operator_input(RpnCalculator::OPERATORS[3])
+    assert_equal @calculator.stack[0], 1
+    @calculator.stack = [5, 10]
+    @calculator.calculate_operator_input(RpnCalculator::OPERATORS[1])
+    assert_equal @calculator.stack[0], -5
+    @calculator.stack = [100, 134]
+    @calculator.calculate_operator_input(RpnCalculator::OPERATORS[2])
+    assert_equal @calculator.stack[0], 13400
+  end
+
+  def test_divide_by_zero
+    assert @calculator.check_divide_by_zero([10, 0], RpnCalculator::OPERATORS.last)
+    assert @calculator.check_divide_by_zero([0, 0], RpnCalculator::OPERATORS.last)
+    refute @calculator.check_divide_by_zero([0, 1], RpnCalculator::OPERATORS.last)
+    refute @calculator.check_divide_by_zero([0, 0], RpnCalculator::OPERATORS.first)
+    @calculator.stack = [100, 0]
+    @calculator.calculate_operator_input(RpnCalculator::OPERATORS.last)
+    assert_equal @calculator.stack[0], 0
+  end
+
+  def check_multiply_zero_by_another_number
+    assert @calculator.check_multiply_zero_by_another_number([0, 0], RpnCalculator::OPERATORS[2])
+    assert @calculator.check_multiply_zero_by_another_number([0, 100], RpnCalculator::OPERATORS[2])
+    refute @calculator.check_multiply_zero_by_another_number([10, 0], RpnCalculator::OPERATORS[2])
+    refute @calculator.check_multiply_zero_by_another_number([3, 5], RpnCalculator::OPERATORS[2])
+    @calculator.stack = [0, 5]
+    @calculator.calculate_operator_input(RpnCalculator::OPERATORS[2])
+    assert_equal @calculator.stack[0], 0
+  end
 end
