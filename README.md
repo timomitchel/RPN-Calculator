@@ -33,3 +33,6 @@ calculator.run
 ```
 And enter `ruby lib/rpn_calculator.rb` in your terminal.
 Have fun!
+
+Video Demonstration:
+https://www.useloom.com/share/80590e55d24147dfa964c0a382723d3a
