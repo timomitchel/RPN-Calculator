@@ -2,13 +2,13 @@ Explanation: In Reverse Polish Notation (RPN) the operators follow their operand
 
 Example: The infix expression `5 + ((1 + 2) * 4) - 3` can be written down like this in RPN: 5 1 2 + 4 * + 3 -
 
-Instructions: Your calculator should handle:
-
-- At least 4 numbers
+The Calculator can handle:
+- Any integer passed in.
 
 - The four basic arithemetic operations `+, -, *, /`.
 
-- Use `standard in` and `standard out` to accept and return data. Entering `q` should quit the application.
+- User error - The program will let you know if you've entered an invalid character.
+
 
 ```
 Sample:
@@ -25,3 +25,11 @@ Sample:
 q
 goodbye
 ```
+
+To run the program add these two lines to the end of the `rpn_calculator.rb` file:
+```
+calculator = RpnCalculator.new
+calculator.run
+```
+And enter `ruby lib/rpn_calculator.rb` in your terminal.
+Have fun!
