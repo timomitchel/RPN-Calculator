@@ -29,10 +29,12 @@ Sample:
 q
 goodbye
 ```
-
 ***To run the tests:
 Enter `ruby test/rpn_calculator_test.rb` in your terminal.
 
 ***To run the program:
 Enter `ruby lib/runner.rb` in your terminal.
 Have fun!
+
+Video Demonstration:
+https://www.useloom.com/share/80590e55d24147dfa964c0a382723d3a
