@@ -9,6 +9,7 @@ end
 class RpnCalculatorTest < Minitest::Test
 
   TEST_INPUT = ['13','5293094','5'].freeze
+  TEST_CHARACTERS = %w(= '' w Z @ 5- +1).freeze
 
   def setup
     @calculator = RpnCalculator.new
@@ -43,13 +44,13 @@ class RpnCalculatorTest < Minitest::Test
     refute @calculator.filter_input(RpnCalculator::OPERATORS[1])
     refute @calculator.filter_input(RpnCalculator::OPERATORS[2])
     refute @calculator.filter_input(RpnCalculator::OPERATORS[3])
-    refute @calculator.filter_input('=')
-    assert @calculator.filter_input('')
-    assert @calculator.filter_input('w')
-    assert @calculator.filter_input('Z')
-    assert @calculator.filter_input('@')
-    assert @calculator.filter_input('5-')
-    assert @calculator.filter_input('+1')
+    refute @calculator.filter_input(RpnCalculatorTest::TEST_CHARACTERS.first)
+    assert @calculator.filter_input(RpnCalculatorTest::TEST_CHARACTERS[1])
+    assert @calculator.filter_input(RpnCalculatorTest::TEST_CHARACTERS[2])
+    assert @calculator.filter_input(RpnCalculatorTest::TEST_CHARACTERS[3])
+    assert @calculator.filter_input(RpnCalculatorTest::TEST_CHARACTERS[4])
+    assert @calculator.filter_input(RpnCalculatorTest::TEST_CHARACTERS[5])
+    assert @calculator.filter_input(RpnCalculatorTest::TEST_CHARACTERS.last)
   end
 
   def test_calculate_operator_input
