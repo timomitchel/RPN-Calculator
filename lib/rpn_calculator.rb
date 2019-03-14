@@ -1,6 +1,7 @@
 class RpnCalculator
 
   OPERATORS = %w(+ - * /).freeze
+  SPECIAL_INPUT_CHARACTERS = %w(q =).freeze
 
   attr_reader :polish_expression, :stack
   def initialize
@@ -18,11 +19,11 @@ class RpnCalculator
   end
 
   def check_divide_by_zero(numbers, operator)
-    numbers.last == 0 && operator == '/'
+    numbers.last == 0 && operator == RpnCalculator::OPERATORS.last
   end
 
   def check_multiply_zero_by_another_number(numbers, operator)
-    numbers.first == 0 && operator == '*'
+    numbers.first == 0 && operator == RpnCalculator::OPERATORS[2]
   end
 
   def calculate_operator_input(operator)
@@ -68,10 +69,10 @@ class RpnCalculator
   def check_input(input)
     check_filter_input(input)
     case input
-    when 'q'
+    when RpnCalculator::SPECIAL_INPUT_CHARACTERS.first
         p 'goodbye'
         exit!
-    when '='
+    when RpnCalculator::SPECIAL_INPUT_CHARACTERS.last
       calculate_values(@polish_expression)
     else
       @polish_expression << input
